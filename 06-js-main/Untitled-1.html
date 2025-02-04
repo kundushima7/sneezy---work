@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        .cover-image-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background-color: #f0f0f0;
+        }
+
+        .cover-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .cover-image-container:hover .camera-icon {
+            display: block;
+        }
+
+        .profile-image-container {
+            position: absolute;
+            bottom: -50px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid white;
+            background-color: #f0f0f0;
+        }
+
+        .profile-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-image-container:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-image-container:hover .profile-icon {
+            display: block;
+        }
+
+        .profile-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .container {
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cover-image-container">
+            <img src="cover-placeholder.jpg" alt="Cover Image" id="coverImage">
+            <button class="camera-icon" onclick="uploadCoverImage()">📷</button>
+        </div>
+        <div class="profile-image-container">
+            <img src="profile-placeholder.jpg" alt="Profile Image" id="profileImage">
+            <button class="profile-icon" onclick="uploadProfileImage()">📷</button>
+        </div>
+    </div>
+
+    <script>
+        function uploadCoverImage() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = event => {
+                    document.getElementById('coverImage').src = event.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+            input.click();
+        }
+
+        function uploadProfileImage() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = event => {
+                    document.getElementById('profileImage').src = event.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+            input.click();
+        }
+    </script>
+</body>
+</html>
